@@ -21,9 +21,13 @@ function updadeSave(save) {
 
 function newSave(){
     const save = {
+        level: 1,
+        xp:0,
+        maxXp:50,
         coin: 0,
         str:2,
-        hp:1
+        hp:10,
+        maxHp:10
     }
     writeJson(save)
 

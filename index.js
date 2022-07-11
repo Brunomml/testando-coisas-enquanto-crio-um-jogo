@@ -1,5 +1,5 @@
 const prompt = require("readline-sync").prompt
-const actions = require("./src/actions.js")
+const actions = require("./src/action.js")
 
 while (true) {
     const input = prompt()
