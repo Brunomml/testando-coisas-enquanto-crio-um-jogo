@@ -1,28 +1,43 @@
 const { getSave, updadeSave } = require("../save.js")
+const heal = require("./heal.js")
 
-let save = getSave()
+let player = getSave()
 
-function levelUp() {
-    save = getSave()
-    if (save.xp >= save.maxXp) {
-        save.xp-=save.maxXp
-        save.maxXp*=1.3
+function levelUP() {
+    player = getSave()
+    if(player.xp < player.maxXp) return
+    console.log("level up")
+
+    const updade_level_player = function(){
+        player.xp-=player.maxXp
+        player.maxXp*=1.2
     }
-    updadeSave(save)
+
+    const playerUP = function(){
+        player.level += 1
+        player.str += 1
+        player.maxHp += 5
+    }
+
+
+    updade_level_player()
+    playerUP()
+    
+    updadeSave(player)
+    heal()
 }
-function levelDown(){
-    save = getSave()
-    save.xp = 0
 
-    if (save.level>1){
-        console.log("you lost 1 level");
+function levelDOWN(){
+    player.xp = 0
 
-        save.level-=1
-        updadeSave(save)
-    }
+    if (player.level == 1)return
+    console.log("you lost 1 level");
+    
+    player.level-=1
+    updadeSave(player)
 }
 
 module.exports = {
-    levelUp,
-    levelDown
+    levelUP,
+    levelDOWN
 }

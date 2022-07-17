@@ -1,13 +1,19 @@
 const hunt = require("./actions/hunt.js")
 const profile = require("./actions/profile.js")
 const heal = require("./actions/heal.js")
+const help = require('./actions/help.js')
+const inventory = require('./actions/inventory.js')
+const { buy } = require("./actions/shop.js")
 
 
 function actions(key, parameters) {
     const userActions = {
-        profile,p:profile,
-        hunt,h:hunt,
-        heal, drink:heal
+        profile,     p: profile,
+        hunt,        h: hunt,
+        heal,        drink: heal,
+        inventory,   backpack: inventory,   i: inventory,
+        help,
+        buy,
     }
 
     if (!userActions[key]) return
@@ -19,13 +25,10 @@ function start(input) {
 
     let action = ""
     let parameters = []
-    for (let index = 0; index < inputArr.length; index++) {
-        const element = inputArr[index];
-
-        if (index == 0) action = element
-        else parameters.push(element)
-    }
-
+    inputArr.forEach((value, index) => {
+        if (index == 0) action = value
+        else parameters.push(value)
+    })
     actions(action, parameters)
 }
 

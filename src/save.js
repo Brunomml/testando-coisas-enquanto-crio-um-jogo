@@ -23,11 +23,17 @@ function newSave(){
     const save = {
         level: 1,
         xp:0,
-        maxXp:50,
+        maxXp:20,
         coin: 0,
         str:2,
         hp:10,
-        maxHp:10
+        maxHp:10,
+        inventory:[
+            {
+                name: "life potion",
+                quantidade: 5
+            }
+        ]
     }
     writeJson(save)
 

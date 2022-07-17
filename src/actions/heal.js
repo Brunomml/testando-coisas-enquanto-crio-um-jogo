@@ -2,11 +2,11 @@ const { getSave, updadeSave } = require("../save.js")
 
 
 function heal() {
-    const save = getSave()
+    const player = getSave()
     console.log("life restaured");
 
-    save.hp = save.maxHp
-    updadeSave(save)
+    player.hp = player.maxHp
+    updadeSave(player)
 }
 
 module.exports = heal

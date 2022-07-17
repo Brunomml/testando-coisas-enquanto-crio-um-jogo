@@ -1,57 +1,62 @@
 const { getSave, updadeSave } = require("../save.js");
-const { levelUp, levelDown } = require("./level.js");
+const level = require("./level.js");
 const heal = require("./heal.js");
 
+
+let player = getSave()
+
 const random = (max, min) => Math.floor(Math.random() * (max - min + 1) + min)
+const createEnemy = () => { return {
+    hp: random(15.0, 5.0),
+    str: random(1, 1.0),
+    xp: random(3.7, 0.1),
+    coin: random(50, 0)
+}}
 
-let save = getSave()
-
-function win(xp) {
+function win(enemy, playerHp) {
     console.log("you win");
-    console.log(save.hp);
+    console.log(`you lost ${playerHp-player.hp}hp`);
 
-    save.xp += xp
-    updadeSave(save)
-    levelUp()
+    player.xp += enemy.xp
+    player.coin += enemy.coin
+    updadeSave(player)
+    level.levelUP()
 }
 function lost() {
     console.log("you lost");
 
-    save.hp = 0
-    updadeSave(save)
-    levelDown()
+    player.hp = 0
+    updadeSave(player)
     heal()
+    level.levelDOWN()
 }
 
 function hunt() {
-    console.log("start hunt");
-    let turn = () => random(100, 0)
+    let enemy = createEnemy()
 
-    let enemy = {
-        hp: random(15.0, 5.0),
-        str: random(1, 1.0),
-        xp: random(3.7, 0.1)
-    }
-    console.log(enemy);
-    console.log(save);
+    console.log("start hunt");
+    console.log("");
+    
+    let turn = "player"
+    const playerHp = player.hp
 
     while (true) {
-        // your time
-        if (turn() >= 50) {
-            enemy.hp -= save.str
+        if (turn == "player") {
+            enemy.hp -= player.str
+            turn = "enemy"
         }
 
-        // enemy's turn
-        if (turn() < 50) {
-            save.hp -= enemy.str
+        if (turn == "enemy") {
+            player.hp -= enemy.str
+            turn = "player"
         }
 
 
         if (enemy.hp <= 0) {
-            win(enemy.xp)
+            win(enemy, playerHp)
             break
         }
-        if (save.hp <= 0) {
+        if (player.hp <= 0) {
             lost()
             break
         }
@@ -59,7 +64,7 @@ function hunt() {
 }
 
 function start() {
-    save = getSave()
+    player = getSave()
     hunt()
 }
 
