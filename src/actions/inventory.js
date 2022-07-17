@@ -7,7 +7,7 @@ function inventory() {
     console.log();
 
     player.inventory.forEach((item) => {
-        console.log(`${item.name}: ${item.quantidade}`);
+        console.log(`${item.name}: ${item.the_amount}`);
     })
 }
 

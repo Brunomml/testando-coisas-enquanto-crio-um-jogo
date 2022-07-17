@@ -24,14 +24,14 @@ function newSave(){
         level: 1,
         xp:0,
         maxXp:20,
-        coin: 0,
+        coin: 100,
         str:2,
         hp:10,
         maxHp:10,
         inventory:[
             {
                 name: "life potion",
-                quantidade: 5
+                the_amount: 5
             }
         ]
     }
