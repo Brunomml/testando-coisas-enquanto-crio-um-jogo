@@ -95,6 +95,8 @@ function buy(argsArray) {
         the_amount: the_amount
     })
 
+    console.log(`you bought ${the_amount} ${item_name}`);
+
     updadeSave(player)
 }
 

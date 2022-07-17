@@ -5,7 +5,12 @@ function heal() {
     const player = getSave()
     console.log("life restaured");
 
-    player.hp = player.maxHp
+    player.inventory.forEach((item, index)=>{
+        if (item.name == "life potion") {
+            player.inventory[index].the_amount -= 1
+            player.hp = player.maxHp
+        }
+    })
     updadeSave(player)
 }
 
